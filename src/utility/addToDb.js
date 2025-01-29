@@ -1,3 +1,5 @@
+// toastify
+import { toast } from 'react-toastify';
 const getStoredReadList = () => {
     //read-list
     const storedListStr = localStorage.getItem('read-list')
@@ -16,13 +18,36 @@ const addToStoredReadList = (id) => {
     if(storedList.includes(id)){
         //already exist. do not add it
         console.log(id, 'already exist in the read list');
+        toast.error('Already exist in the read list', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            
+            });
     }
     else{
         storedList.push(id);
         const storedListStr = JSON.stringify(storedList);
         localStorage.setItem('read-list', storedListStr);
-    }
+        //ideally trigger toast from the component
+        // Toastify
+        toast('This book is added to your read list.', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
 
+    }
 }
 
 
